@@ -113,7 +113,7 @@ class DoublyLinkedList:
         elif node == self.head:
             self.head = self.head.next
             node.delete()
-        elif node == self.head:
+        elif node == self.tail:
             self.tail = self.tail.prev
             node.delete()
         #If node is in middle
