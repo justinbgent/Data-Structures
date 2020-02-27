@@ -153,3 +153,27 @@ class DoublyLinkedListTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+def getMiddleNode(linkedList):
+    middleNode = None
+    currentNode = linkedList.head
+    counter = 0
+    
+    if currentNode == None:
+        # Print no items in list
+        return
+    else:
+        middleNode = currentNode
+        
+    while True:
+        if (counter % 2 == 0) and counter != 0:
+            middleNode = middleNode.next
+
+        if currentNode.next == None:
+            break
+        currentNode = currentNode.next
+        counter += 1
+        
+    return middleNode
+
