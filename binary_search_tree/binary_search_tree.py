@@ -140,15 +140,8 @@ class BinarySearchTree:
     counter = 0
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        global myStack
-        global counter
-        myStack.push(node.value)
         if node.left != None:
             node.left.post_order_dft(node.left)
-            counter += 1
         if node.right != None:
             node.right.post_order_dft(node.right)
-            counter += 1
-        if self.size == counter:
-            for i in range(0, counter):
-                print(myStack.pop())
+        print(node.value)
