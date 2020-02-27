@@ -29,25 +29,12 @@ class BinarySearchTree:
         if self.value == target:
             return True
         elif self.value > target:
-            if self.left == None:
-                return False
-            elif self.left.value == None:
-                return False
-            elif self.left.value == target:
-                return True
-            else:
+            if self.left != None:
                 return self.left.contains(target)
         elif self.value <= target:
-            if self.right == None:
-                return False
-            elif self.right.value == None:
-                return False
-            elif self.right.value == target:
-                return True
-            else:
+            if self.right != None:
                 return self.right.contains(target)
-        else:
-            return False
+        return False
 
     # Return the maximum value found in the tree
     def get_max(self):
@@ -90,20 +77,78 @@ class BinarySearchTree:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        breadthFirstQueue = Queue()
+        breadthFirstQueue.enqueue(node)
+
+        while breadthFirstQueue.size > 0:
+            tempVar = breadthFirstQueue.dequeue()
+            if tempVar:
+                print(tempVar.value)
+                if tempVar.right:
+                    breadthFirstQueue.enqueue(tempVar.right)
+                if tempVar.left:
+                    breadthFirstQueue.enqueue(tempVar.left)
+
+    #initialize a queue
+    #push root to queue
+    #while queue not empty
+    #pop top item out of queue into temp var
+    # this is where we do whatever with each item
+    #if temp has right put into queue
+    #if temp has left put into queue
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        print(node.value)
+        if node.left != None:
+            node.left.dft_print(node.left)
+
+        if node.right != None:
+            node.right.dft_print(node.right)
+        #depthFirstStack = Stack(node)
+
+        #while depthFirstStack.size > 0:
+        #    tempVar = depthFirstStack.pop()
+        #    print(tempVar.value)
+        #    if tempVar.right:
+        #        depthFirstStack.push(tempVar.right)
+        #    if tempVar.left:
+        #        depthFirstStack.push(tempVar.left)
+            
+    #initialize a stack
+    #push root to stack
+    #while stack not empty
+    #pop top item out of stack into temp var
+    # this is where we do whatever with each item
+    #if temp has right put into stack
+    #if temp has left put into stack
+    #discard temp and pop
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        print(node.value)
+        if node.left != None:
+            node.left.pre_order_dft(node.left)
+        if node.right != None:
+            node.right.pre_order_dft(node.right)
 
+    myStack = Stack()
+    counter = 0
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        global myStack
+        global counter
+        myStack.push(node.value)
+        if node.left != None:
+            node.left.post_order_dft(node.left)
+            counter += 1
+        if node.right != None:
+            node.right.post_order_dft(node.right)
+            counter += 1
+        if self.size == counter:
+            for i in range(0, counter):
+                print(myStack.pop())
